@@ -15,23 +15,6 @@
 </head>
 <body>
 
-  <!-- ===================== NAV ===================== -->
-  <header class="nav" id="nav">
-    <div class="nav__inner">
-      <a href="#hero" class="nav__logo" aria-label="Mônica Poplawski — início">
-        <img src="assets/img/logo-white.png" alt="Mônica Poplawski" class="nav__logo-img" />
-      </a>
-      <nav class="nav__links" aria-label="Navegação principal">
-        <a href="#imovel">O Imóvel</a>
-        <a href="#galeria">Galeria</a>
-        <a href="#localizacao">Localização</a>
-      </nav>
-      <a href="https://wa.me/5511945277225" target="_blank" rel="noopener" class="nav__cta">
-        <span>Agendar Visita</span>
-      </a>
-    </div>
-  </header>
-
   <!-- ===================== HERO (vídeo controlado por scroll) ===================== -->
   <section class="hero" id="hero">
     <!-- track: define o "comprimento" de scroll que percorre o vídeo inteiro -->
@@ -52,6 +35,8 @@
 
         <div class="hero__scrim" aria-hidden="true"></div>
         <div class="hero__grain" aria-hidden="true"></div>
+        <!-- Escurecimento dinâmico: sobe quando o texto branco aparece (via JS) -->
+        <div class="hero__dim" id="heroDim" aria-hidden="true"></div>
 
         <!-- Conteúdo sobreposto (intro) -->
         <div class="hero__content" id="heroContent">

@@ -12,7 +12,7 @@
   const scrollCue = document.getElementById("scrollCue");
   const progressBar = document.getElementById("progressBar");
   const loader = document.getElementById("heroLoader");
-  const nav = document.getElementById("nav");
+  const dim = document.getElementById("heroDim");
   const reveals = Array.prototype.slice.call(
     document.querySelectorAll(".reveal")
   );
@@ -34,6 +34,9 @@
   const REVEAL_END = 0.98;
   const REVEAL_FADE = 0.28; // fração da fatia usada para o fade-in e o fade-out
 
+  // Escurecimento do vídeo quando há texto branco na tela (0–1). Maior = mais escuro.
+  const DIM_MAX = 0.45;
+
   // opacidade (0–1) de uma info dentro da sua janela [start, end]
   function windowOpacity(p, start, end, fadeFrac) {
     if (p <= start || p >= end) return 0;
@@ -50,12 +53,6 @@
   let seeking = false;
   let ready = false;
 
-  /* ---------- NAV: alterna estado ao rolar ---------- */
-  function updateNav() {
-    if (window.scrollY > 40) nav.classList.add("is-scrolled");
-    else nav.classList.remove("is-scrolled");
-  }
-
   /* ---------- Progresso do scroll dentro do track (0 → 1) ---------- */
   function getProgress() {
     const rect = track.getBoundingClientRect();
@@ -68,7 +65,6 @@
 
   /* ---------- Atualiza alvo + overlays a cada scroll ---------- */
   function onScroll() {
-    updateNav();
     if (!ready) return;
 
     const p = getProgress();
@@ -76,9 +72,13 @@
 
     // Fade do intro (título): some cedo, antes das infos começarem
     const contentFade = Math.min(1, p / 0.1);
-    content.style.opacity = String(1 - contentFade);
+    const introVis = 1 - contentFade;
+    content.style.opacity = String(introVis);
     content.style.transform = `translateY(${-contentFade * 40}px)`;
     content.style.pointerEvents = contentFade > 0.6 ? "none" : "auto";
+
+    // Guarda a maior visibilidade de texto na tela (intro ou info)
+    let textVis = introVis;
 
     // Informações sequenciais: cada uma aparece e some na sua fatia
     const n = reveals.length;
@@ -92,8 +92,12 @@
         reveals[i].style.opacity = op.toFixed(3);
         // leve deriva vertical (entra de baixo, sai por cima)
         reveals[i].style.transform = `translateY(${((0.5 - local) * 46).toFixed(1)}px)`;
+        if (op > textVis) textVis = op;
       }
     }
+
+    // Escurece levemente o fundo na medida em que o texto branco aparece
+    dim.style.opacity = (textVis * DIM_MAX).toFixed(3);
 
     // Indicador de scroll some rapidinho
     scrollCue.style.opacity = String(Math.max(0, 1 - p * 6));
@@ -162,7 +166,8 @@
   if (prefersReduced) {
     video.setAttribute("poster", ""); // mantém primeiro frame
     hideLoader();
-    window.addEventListener("scroll", updateNav, { passive: true });
+    // sem scrubbing: escurece um pouco para o título intro ficar legível
+    dim.style.opacity = String(DIM_MAX);
     // posiciona num frame representativo e para
     video.addEventListener("loadeddata", function () {
       try {
@@ -175,7 +180,6 @@
   /* ---------- Liga tudo ---------- */
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll, { passive: true });
-  updateNav();
   video.load(); // garante buffering para permitir seeking
   render();
 })();
