@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mônica Poplawski — Imóvel de Alto Padrão</title>
+  <meta name="description" content="Apresentação exclusiva de imóvel de alto padrão em Alphaville. Bem-vindos ao luxo." />
+
+  <!-- Fontes da marca Poplawski: Outfit + Sora -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+  <!-- ===================== NAV ===================== -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#hero" class="nav__logo" aria-label="Mônica Poplawski — início">
+        <img src="assets/img/logo-white.png" alt="Mônica Poplawski" class="nav__logo-img" />
+      </a>
+      <nav class="nav__links" aria-label="Navegação principal">
+        <a href="#imovel">O Imóvel</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#localizacao">Localização</a>
+      </nav>
+      <a href="https://wa.me/5511945277225" target="_blank" rel="noopener" class="nav__cta">
+        <span>Agendar Visita</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ===================== HERO (vídeo controlado por scroll) ===================== -->
+  <section class="hero" id="hero">
+    <!-- track: define o "comprimento" de scroll que percorre o vídeo inteiro -->
+    <div class="hero__track" id="heroTrack">
+      <!-- stage: fica fixo (sticky) na tela enquanto rolamos o track -->
+      <div class="hero__stage">
+        <!-- Versão web otimizada: 1600x900, keyframe em todo frame (scrubbing fluido), sem áudio, faststart -->
+        <video
+          class="hero__video"
+          id="heroVideo"
+          src="0718-web.mp4"
+          muted
+          playsinline
+          preload="auto"
+          aria-hidden="true"
+          tabindex="-1"
+        ></video>
+
+        <div class="hero__scrim" aria-hidden="true"></div>
+        <div class="hero__grain" aria-hidden="true"></div>
+
+        <!-- Conteúdo sobreposto (intro) -->
+        <div class="hero__content" id="heroContent">
+          <p class="eyebrow eyebrow--light">Genesis 1 · Santana de Parnaíba</p>
+          <h1 class="hero__title">
+            <span class="line">Arquitetura em diálogo</span>
+            <span class="line line--em">com a natureza</span>
+          </h1>
+          <p class="hero__sub">
+            Projeto autoral de Rodrigo La Torre.
+            Role a página e percorra a casa.
+          </p>
+          <a href="#imovel" class="btn btn--ghost">Explorar o imóvel</a>
+        </div>
+
+        <!-- Informações da casa reveladas em sequência conforme o scroll -->
+        <div class="hero__reveals" id="heroReveals" aria-hidden="true">
+          <figure class="reveal">
+            <span class="reveal__index">01</span>
+            <p class="reveal__headline">Vista permanente para a mata preservada</p>
+            <figcaption class="reveal__sub">Integração total com a natureza</figcaption>
+          </figure>
+          <figure class="reveal">
+            <span class="reveal__index">02</span>
+            <p class="reveal__headline">Projeto autoral de Rodrigo La Torre</p>
+            <figcaption class="reveal__sub">Linhas contemporâneas e luz natural</figcaption>
+          </figure>
+          <figure class="reveal">
+            <span class="reveal__index">03</span>
+            <p class="reveal__headline">4 suítes com marcenaria sob medida</p>
+            <figcaption class="reveal__sub">Escritório privativo · Adega</figcaption>
+          </figure>
+          <figure class="reveal">
+            <span class="reveal__index">04</span>
+            <p class="reveal__headline">Piscina e sauna imersas no paisagismo</p>
+            <figcaption class="reveal__sub">Área de lazer voltada ao bem-estar</figcaption>
+          </figure>
+          <figure class="reveal">
+            <span class="reveal__index">05</span>
+            <p class="reveal__headline">600 m² de terreno · 500 m² construídos</p>
+            <figcaption class="reveal__sub">Acabamentos Portinari &amp; Deca</figcaption>
+          </figure>
+        </div>
+
+        <!-- Indicador de scroll -->
+        <div class="hero__scrollcue" id="scrollCue" aria-hidden="true">
+          <span>SCROLL</span>
+          <span class="hero__scrollcue-line"></span>
+        </div>
+
+        <!-- Barra de progresso do vídeo -->
+        <div class="hero__progress" aria-hidden="true">
+          <div class="hero__progress-bar" id="progressBar"></div>
+        </div>
+
+        <!-- Loader enquanto o vídeo carrega -->
+        <div class="hero__loader" id="heroLoader" aria-hidden="true">
+          <div class="hero__loader-ring"></div>
+          <span>Carregando experiência…</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAIXA DE CONTINUIDADE (placeholder p/ próximas etapas) ===================== -->
+  <section class="facts" id="imovel">
+    <div class="facts__inner">
+      <p class="eyebrow">Genesis 1 · Santana de Parnaíba · Ref. MP-0126</p>
+      <h2 class="facts__title">Casa Contemporânea e Integração com a Natureza</h2>
+      <ul class="facts__grid">
+        <li><strong>4</strong><span>Suítes</span></li>
+        <li><strong>2</strong><span>Vagas</span></li>
+        <li><strong>600</strong><span>m² de terreno</span></li>
+        <li><strong>~500</strong><span>m² construídos</span></li>
+        <li class="facts__price"><strong>R$ 10.900.000</strong><span>Valor de venda</span></li>
+      </ul>
+      <p class="facts__note">
+        ↑ Dados reais do imóvel. As próximas seções (galeria, planta, localização,
+        tour em vídeo e contato) entram nos próximos passos.
+      </p>
+    </div>
+  </section>
+
+  <script src="assets/js/hero.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+# Dependências / tooling local (ffmpeg-static usado só para reencodar o vídeo)
+# Não são necessárias para o site nem para o deploy.
+node_modules/
+package.json
+package-lock.json
+
+# Config de ferramentas
+.claude/
+.vercel/
+
+# Vídeo-fonte original (o site usa o 0718-web.mp4 otimizado).
+# Remova esta linha se quiser versionar o original também.
+0718.mp4
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini

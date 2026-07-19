@@ -1,0 +1,615 @@
+/* ============================================================
+   Sistema de design — tokens extraídos de poplawski.com.br
+   ============================================================ */
+:root {
+  /* Neutros / superfícies */
+  --cream: #f5f1ec;
+  --cream-warm: #ede8e2;
+  --border: #ddd6cc;
+  --white: #ffffff;
+  --charcoal: #0a0a0a;
+  --dark: #050505;
+
+  /* Destaque primário — dourado/bronze da marca */
+  --gold: #885e46;
+  --gold-dark: #6e4a36;
+  --gold-light: #cfbfb0;
+  --sand: #cfbfb0;
+
+  /* Destaque secundário */
+  --accent: #507b8c;
+
+  /* Texto */
+  --text: #3a3a3a;
+  --text-light: #717171;
+  --text-muted: #9e9e9e;
+
+  /* Movimento */
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition: 0.4s var(--ease);
+
+  /* Sombras */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.08);
+
+  --nav-h: 84px;
+}
+
+/* ============================================================
+   Reset base
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  /* overflow-x no html (e não no body) para não transformar o body em
+     contêiner de scroll — isso quebraria o position: sticky do hero */
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Outfit", system-ui, -apple-system, sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Rótulos em maiúsculas espaçadas (assinatura visual da marca) */
+.eyebrow {
+  font-family: "Sora", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.eyebrow--light {
+  color: var(--gold-light);
+  text-shadow: 0 1px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* ============================================================
+   Botões
+   ============================================================ */
+.btn {
+  --btn-fg: var(--white);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: "Sora", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 1.05em 2.4em;
+  border: 1px solid currentColor;
+  color: var(--btn-fg);
+  background: transparent;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background var(--transition), color var(--transition),
+    border-color var(--transition), transform var(--transition);
+}
+.btn--ghost {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(2px);
+}
+.btn--ghost:hover {
+  background: var(--white);
+  color: var(--charcoal);
+  border-color: var(--white);
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  transition: background var(--transition), box-shadow var(--transition),
+    height var(--transition);
+}
+.nav__inner {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 56px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.nav__logo-img {
+  height: 40px;
+  width: auto;
+  transition: opacity var(--transition), filter var(--transition);
+}
+.nav__links {
+  display: flex;
+  gap: clamp(20px, 3vw, 44px);
+  font-family: "Sora", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.88);
+}
+.nav__links a {
+  position: relative;
+  padding: 4px 0;
+  transition: color var(--transition);
+}
+.nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width var(--transition);
+}
+.nav__links a:hover::after {
+  width: 100%;
+}
+.nav__cta {
+  font-family: "Sora", sans-serif;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 0.8em 1.6em;
+  border-radius: 2px;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.nav__cta:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+/* Estado "scrolled": fundo creme sólido, logo dourado, texto escuro */
+.nav.is-scrolled {
+  background: rgba(245, 241, 236, 0.92);
+  box-shadow: var(--shadow-sm);
+  height: 68px;
+  backdrop-filter: blur(10px);
+}
+.nav.is-scrolled .nav__logo-img {
+  /* troca o logo branco por uma versão escura via filtro de cor */
+  filter: brightness(0) saturate(100%) invert(38%) sepia(18%) saturate(1000%)
+    hue-rotate(340deg) brightness(92%) contrast(88%);
+}
+.nav.is-scrolled .nav__links {
+  color: var(--text);
+}
+.nav.is-scrolled .nav__cta {
+  color: var(--gold-dark);
+  border-color: var(--gold);
+}
+.nav.is-scrolled .nav__cta:hover {
+  color: var(--white);
+}
+
+/* ============================================================
+   HERO — vídeo controlado por scroll
+   ============================================================ */
+.hero {
+  position: relative;
+  background: var(--dark);
+}
+
+/* track: quanto mais alto, mais "lento"/detalhado é o scrubbing do vídeo.
+   Ajuste --hero-track para calibrar a velocidade (maior = mais lento). */
+:root {
+  --hero-track: 820vh;
+}
+.hero__track {
+  height: var(--hero-track); /* 100vh de palco + o restante de percurso de scroll */
+  position: relative;
+}
+
+/* stage: fixado na tela enquanto rolamos o track */
+.hero__stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  /* garante o primeiro frame nítido antes do scrubbing */
+  background: #000;
+}
+
+/* Scrim para legibilidade do texto sobre o vídeo */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    /* leve plate radial atrás do texto — garante legibilidade em qualquer frame */
+    radial-gradient(75% 55% at 50% 44%, rgba(5, 5, 5, 0.5) 0%,
+      rgba(5, 5, 5, 0.22) 45%, transparent 72%),
+    linear-gradient(180deg, rgba(5, 5, 5, 0.55) 0%, rgba(5, 5, 5, 0.14) 28%,
+      rgba(5, 5, 5, 0.16) 60%, rgba(5, 5, 5, 0.74) 100%),
+    radial-gradient(120% 80% at 50% 60%, transparent 40%, rgba(5, 5, 5, 0.4) 100%);
+}
+.hero__grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.05;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Conteúdo sobreposto */
+.hero__content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: var(--white);
+  padding: 0 24px;
+  max-width: 900px;
+  will-change: transform, opacity;
+}
+.hero__content .eyebrow {
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease) 0.3s forwards;
+}
+.hero__title {
+  font-family: "Outfit", sans-serif;
+  font-weight: 200;
+  font-size: clamp(2.6rem, 8vw, 6.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.55), 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+.hero__title .line {
+  display: block;
+  opacity: 0;
+  animation: fadeUp 1.1s var(--ease) forwards;
+}
+.hero__title .line:nth-child(1) {
+  animation-delay: 0.45s;
+}
+.hero__title .line:nth-child(2) {
+  animation-delay: 0.6s;
+}
+.hero__title .line--em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--gold-light);
+}
+.hero__sub {
+  font-family: "Sora", sans-serif;
+  font-weight: 300;
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 34ch;
+  margin: 26px auto 40px;
+  line-height: 1.7;
+  text-shadow: 0 1px 20px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  animation: fadeUp 1.1s var(--ease) 0.8s forwards;
+}
+.hero__content .btn {
+  opacity: 0;
+  animation: fadeUp 1.1s var(--ease) 1s forwards;
+}
+
+/* Informações da casa reveladas em sequência (controladas por JS via scroll) */
+.hero__reveals {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.reveal {
+  position: absolute;
+  margin: 0;
+  padding: 0 24px;
+  max-width: 840px;
+  text-align: center;
+  color: var(--white);
+  opacity: 0;
+  will-change: opacity, transform;
+}
+.reveal__index {
+  display: inline-block;
+  position: relative;
+  font-family: "Sora", sans-serif;
+  font-weight: 500;
+  font-size: 0.76rem;
+  letter-spacing: 0.32em;
+  color: var(--gold-light);
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.6);
+}
+.reveal__index::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 12px;
+  background: rgba(207, 191, 176, 0.75);
+}
+.reveal__headline {
+  font-family: "Outfit", sans-serif;
+  font-weight: 200;
+  font-size: clamp(1.9rem, 4.6vw, 3.7rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.55), 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+.reveal__sub {
+  margin-top: 22px;
+  font-family: "Sora", sans-serif;
+  font-weight: 300;
+  font-size: clamp(0.78rem, 1.3vw, 0.95rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.5);
+}
+
+/* Indicador de scroll */
+.hero__scrollcue {
+  position: absolute;
+  bottom: 34px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: "Sora", sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.34em;
+  color: rgba(255, 255, 255, 0.7);
+  transition: opacity 0.4s var(--ease);
+}
+.hero__scrollcue-line {
+  width: 1px;
+  height: 54px;
+  background: rgba(255, 255, 255, 0.35);
+  overflow: hidden;
+  position: relative;
+}
+.hero__scrollcue-line::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: var(--white);
+  animation: scrollLine 2s var(--ease) infinite;
+}
+
+/* Barra de progresso do vídeo */
+.hero__progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  z-index: 4;
+}
+.hero__progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  transition: width 0.08s linear;
+}
+
+/* Loader */
+.hero__loader {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: var(--dark);
+  color: rgba(255, 255, 255, 0.7);
+  font-family: "Sora", sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  transition: opacity 0.6s var(--ease), visibility 0.6s var(--ease);
+}
+.hero__loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.hero__loader-ring {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-top-color: var(--gold-light);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+/* ============================================================
+   FAIXA DE CONTINUIDADE
+   ============================================================ */
+.facts {
+  background: var(--cream);
+  padding: clamp(70px, 12vh, 140px) clamp(20px, 5vw, 56px);
+}
+.facts__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+.facts__title {
+  font-family: "Outfit", sans-serif;
+  font-weight: 200;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  color: var(--charcoal);
+  margin: 18px 0 46px;
+  letter-spacing: -0.01em;
+}
+.facts__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.facts__grid li {
+  background: var(--cream);
+  padding: 38px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.facts__grid strong {
+  font-family: "Outfit", sans-serif;
+  font-weight: 300;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  color: var(--gold-dark);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.facts__grid span {
+  font-family: "Sora", sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+.facts__price {
+  grid-column: 1 / -1;
+}
+.facts__price strong {
+  color: var(--gold);
+}
+.facts__note {
+  margin-top: 40px;
+  font-family: "Sora", sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ============================================================
+   Animações
+   ============================================================ */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes scrollLine {
+  0% { top: -60%; }
+  100% { top: 100%; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   Responsivo
+   ============================================================ */
+@media (max-width: 860px) {
+  .nav__links {
+    display: none;
+  }
+  :root {
+    --hero-track: 620vh;
+  }
+}
+
+@media (max-width: 560px) {
+  :root {
+    --nav-h: 68px;
+  }
+  .nav__logo-img {
+    height: 32px;
+  }
+  .hero__sub {
+    margin: 20px auto 32px;
+  }
+}
+
+/* ============================================================
+   Movimento reduzido — sem scrubbing, hero estático legível
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero__track {
+    height: 100vh;
+    height: 100dvh;
+  }
+  .hero__content .eyebrow,
+  .hero__title .line,
+  .hero__sub,
+  .hero__content .btn {
+    animation: none;
+    opacity: 1;
+  }
+  .hero__scrollcue-line::after {
+    animation: none;
+  }
+}
