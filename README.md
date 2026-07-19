@@ -10,7 +10,7 @@ Servidor estático com suporte a **HTTP range requests** (necessário para o scr
 vídeo), sem nenhuma dependência externa:
 
 ```bash
-node server.js
+node dev-server.js
 # abre em http://localhost:5173
 ```
 
@@ -40,7 +40,7 @@ assets/css/styles.css # design system (tokens da marca Poplawski)
 assets/js/hero.js     # scroll-scrubbing + informações sequenciais
 assets/img/           # logos
 0718-web.mp4          # vídeo otimizado do hero
-server.js             # servidor estático local (dev)
+dev-server.js         # servidor estático local (dev) — ignorado no deploy
 vercel.json           # config de deploy
 ```
 

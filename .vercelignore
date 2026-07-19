@@ -1,6 +1,6 @@
-# Impede o Vercel de tratar o server.js (dev local) como entrypoint da aplicação.
-# Sem ele, o Vercel serve o site como estático puro (index.html na raiz).
-server.js
+# Impede o Vercel de subir o servidor de dev local.
+# Sem nenhum arquivo de servidor, o Vercel serve o site como estático puro.
+dev-server.js
 
 # Segurança extra (já não vão no git, mas garante que não subam ao Vercel)
 node_modules
